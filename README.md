@@ -1,3 +1,4 @@
+<<<<<<< 469cb3f576f8342655bf77da018e5a9850d92c2f
 # You've added your first ReadMe file!
 A README.md file is intended to quickly orient readers to what your project can do.  New to Markdown? [Learn more](https://go.microsoft.com/fwlink/p/?LinkId=524306&clcid=0x409)
 
@@ -35,3 +36,6 @@ Choose and install one of these supported IDEs:
 Then clone this repo to your local machine to get started with your own project.
 
 Happy coding!
+=======
+ReadMe
+>>>>>>> Add Capabilitiest to package manifest

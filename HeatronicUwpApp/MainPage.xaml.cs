@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // Die Vorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 dokumentiert.
 
-namespace HeatronicUwpApp
+namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp
 {
     /// <summary>
     /// Eine leere Seite, die eigenständig verwendet oder zu der innerhalb eines Rahmens navigiert werden kann.
