@@ -95,10 +95,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="App\Class1.cs" />
+    <Compile Include="Extentions\HttpClientExtention.cs" />
+    <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="App\NetworkPushService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rest\BaseMessageRto.cs" />
+    <Compile Include="Rest\HeizgeraetMessageRto.cs" />
+    <Compile Include="Rest\HeizkreisMessageRto.cs" />
+    <Compile Include="Extentions\JSONSerializer.cs" />
+    <Compile Include="Rest\TimestampMessageRto.cs" />
+    <Compile Include="Rest\WarmwasserMessageRto.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -121,7 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -131,7 +140,12 @@
       <Project>{ab0678c9-b353-472c-90e8-9638f8c45535}</Project>
       <Name>HeatronicUwpLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MicroWebServerLib\MicroWebServerLib.csproj">
+      <Project>{cdc8c252-9fdb-4f2f-b869-f057644e1f86}</Project>
+      <Name>MicroWebServerLib</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
