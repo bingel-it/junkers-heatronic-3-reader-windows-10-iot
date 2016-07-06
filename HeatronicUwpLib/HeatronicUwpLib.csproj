@@ -108,12 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CRCChecker.cs" />
-    <Compile Include="Dto\HeizgeraetMessage.cs" />
-    <Compile Include="Dto\HeizkreisMessage.cs" />
-    <Compile Include="Dto\HeizkreisSteuerungMessage.cs" />
-    <Compile Include="Dto\Message.cs" />
-    <Compile Include="Dto\TimestampMessage.cs" />
-    <Compile Include="Dto\WarmWaterMessage.cs" />
+    <Compile Include="Dto\HeizgeraetDTO.cs" />
+    <Compile Include="Dto\HeizkreisDTO.cs" />
+    <Compile Include="Dto\HeizkreisSteuerungDTO.cs" />
+    <Compile Include="Dto\HeatronicDTO.cs" />
+    <Compile Include="Dto\TimestampDTO.cs" />
+    <Compile Include="Dto\WarmWaterDTO.cs" />
     <Compile Include="Extentions\ByteArrayExtention.cs" />
     <Compile Include="Extentions\DataReaderExtention.cs" />
     <Compile Include="HeatronicGateway.cs" />

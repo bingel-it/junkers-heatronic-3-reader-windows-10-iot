@@ -126,6 +126,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HeatronicUwpLib\HeatronicUwpLib.csproj">
+      <Project>{ab0678c9-b353-472c-90e8-9638f8c45535}</Project>
+      <Name>HeatronicUwpLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
