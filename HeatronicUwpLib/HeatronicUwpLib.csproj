@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ab0678c9-b353-472c-90e8-9638f8c45535}</ProjectGuid>
+    <ProjectGuid>{AB0678C9-B353-472C-90E8-9638F8C45535}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HeatronicUwpLib</RootNamespace>
@@ -107,10 +107,26 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CRCChecker.cs" />
+    <Compile Include="Dto\HeizgeraetMessage.cs" />
+    <Compile Include="Dto\HeizkreisMessage.cs" />
+    <Compile Include="Dto\HeizkreisSteuerungMessage.cs" />
+    <Compile Include="Dto\Message.cs" />
+    <Compile Include="Dto\TimestampMessage.cs" />
+    <Compile Include="Dto\WarmWaterMessage.cs" />
+    <Compile Include="Extentions\ByteArrayExtention.cs" />
+    <Compile Include="Extentions\DataReaderExtention.cs" />
+    <Compile Include="HeatronicGateway.cs" />
+    <Compile Include="MessageDecoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\HeatronicUwpLib.rd.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.10586.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
