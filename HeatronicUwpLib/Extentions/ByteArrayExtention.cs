@@ -48,5 +48,14 @@ namespace HeatronicUwpLib.Extentions
                 || candidate.Length == 0
                 || candidate.Length > array.Length;
         }
+
+
+        static string ToFormattedHexString(this byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2} ", b);
+            return hex.ToString();
+        }
     }
 }
