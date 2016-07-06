@@ -25,28 +25,5 @@ namespace HeatronicUwpLib.Extentions
             return result;
         }
 
-
-        /*
-                public static byte ReadByteAsync(this DataReader dataReader)
-        {
-            var task = Task<byte>.Run(async () => {
-                await dataReader.LoadAsync(1);
-                return dataReader.ReadByte();
-            });
-            return task.Result;
-        }
-
-        public static byte[] ReadBytesAsync(this DataReader dataReader, uint length)
-        {
-            var task = Task<byte[]>.Run(async () => {
-                await dataReader.LoadAsync(length);
-                var result = new byte[length];
-                dataReader.ReadBytes(result);
-                return result;
-            });
-            return task.Result;
-        }
-
-        */
     }
 }
