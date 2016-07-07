@@ -48,7 +48,6 @@ namespace HeatronicUwpLib
 
         protected virtual void OnNewMessage(NewMessageEventArgs e)
         {
-            Debug.WriteLine(DateTime.Now + ": New message: " + e.MessageType);
             if (NewMessage != null)
                 NewMessage(this, e);
         }

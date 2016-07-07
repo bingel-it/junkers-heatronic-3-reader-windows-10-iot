@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Extentions
+namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Extentions
 {
     static class HttpClientExtention
     {

@@ -105,11 +105,9 @@
     <Compile Include="AppServiceClients\Heatronic\NewMessageEventArgs.cs" />
     <Compile Include="App\HeatronicApp.cs" />
     <Compile Include="AppServiceClients\Heatronic\HeatronicAppServiceClient.cs" />
-    <Compile Include="Extentions\HttpClientExtention.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\NetworkPushService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\BaseMessageRto.cs" />
     <Compile Include="Rest\HeizgeraetMessageRto.cs" />

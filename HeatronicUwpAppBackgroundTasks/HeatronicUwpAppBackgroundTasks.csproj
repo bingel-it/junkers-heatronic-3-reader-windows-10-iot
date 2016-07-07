@@ -108,14 +108,21 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extentions\HttpClientExtention.cs" />
     <Compile Include="HeatronicListenerTask.cs" />
     <Compile Include="Helper\JSONSerializer.cs" />
+    <Compile Include="Helper\NetworkPushService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServerListenerTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HeatronicUwpLib\HeatronicUwpLib.csproj">
       <Project>{ab0678c9-b353-472c-90e8-9638f8c45535}</Project>
       <Name>HeatronicUwpLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MicroWebServerLib\MicroWebServerLib.csproj">
+      <Project>{cdc8c252-9fdb-4f2f-b869-f057644e1f86}</Project>
+      <Name>MicroWebServerLib</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

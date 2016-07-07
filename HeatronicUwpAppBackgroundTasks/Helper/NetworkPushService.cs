@@ -1,6 +1,4 @@
-﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Extentions;
-using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Rest;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.App
+namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
 {
     class NetworkPushService
     {
@@ -23,7 +21,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.App
             headers.UserAgent.TryParseAdd("Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
         }
 
-        public async void SendMessageToListenerAsync(String subUrl, BaseMessageRto message)
+        public async void SendJsonToListnerAsync(String subUrl, String jsonString)
         {
             List<String> listenersToRemove = new List<string>();
 
@@ -33,8 +31,9 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.App
                 var listenerUrl = listeners[listenerKey];
                 try
                 {
+                    var content = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
                     //Send the GET request
-                    httpResponse = await httpClient.PostAsJsonAsync(listenerUrl, message);
+                    httpResponse = await httpClient.PostAsync(listenerUrl, content);
                     if (!httpResponse.IsSuccessStatusCode)
                     {
                         listenersToRemove.Add(listenerKey);

@@ -116,6 +116,16 @@ namespace BingelIT.MyHome.MicroWebServerLib
             pathHandlers.Add(pathHandler);
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Stop()
+        {
+            throw new NotImplementedException();
+        }
+
         private HttpResponse onRequestReceived(HttpRequest request)
         {
             foreach (PathHandler pathHandler in pathHandlers)
