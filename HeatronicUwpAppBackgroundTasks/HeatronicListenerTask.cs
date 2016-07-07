@@ -1,6 +1,7 @@
 ﻿using HeatronicUwpLib;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,57 +12,47 @@ using Windows.Storage;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 {
+    /// <summary>
+    /// Heatronic listener background task. Listening to the Heatronic bus and sends the messages to all application clients
+    /// </summary>
     public sealed class HeatronicListenerTask : IBackgroundTask, IDisposable
     {
 
+        /// <summary>
+        /// Task deferral for async processing 
+        /// </summary>
         private BackgroundTaskDeferral _deferral;
-        private AppServiceConnection appServiceconnection;
+
+        /// <summary>
+        /// Application service connection to communicate between this task and the client
+        /// </summary>
+        private AppServiceConnection applicationServiceConnection;
+
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-
-            var packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
-
             //keep this background task alive
             _deferral = taskInstance.GetDeferral();
             taskInstance.Canceled += OnTaskCanceled;
 
-            // Start HeatronicGateway
-            //HeatronicGateway heatronicGateway = HeatronicGateway.GetDefault();
-            // Listen to new messages from the Heatronic Gateway
-            //heatronicGateway.NewMessage += HeatronicGateway_NewMessage;
-
             // Retrieve the app service connection
-            var details = taskInstance.TriggerDetails as AppServiceTriggerDetails; // ApplicationTriggerDetails;
-            appServiceconnection = details.AppServiceConnection;
-            appServiceconnection.RequestReceived += OnRequestReceived;
+            var triggerDetails = taskInstance.TriggerDetails as AppServiceTriggerDetails;
+            applicationServiceConnection = triggerDetails.AppServiceConnection;
 
-
-            
-
-        }
-
-        private async void OnRequestReceived(AppServiceConnection sender, AppServiceRequestReceivedEventArgs args)
-        {
-            // Get a deferral because we use an awaitable API below to respond to the message
-            // and we don't want this call to get cancelled while we are waiting.
-            var messageDeferral = args.GetDeferral();
-
-            ValueSet message = args.Request.Message;
-            ValueSet returnData = new ValueSet();
-
-            //string command = message["Command"] as string;
-
-            returnData.Add("Result", "Value");
-
-
-            // Return the data to the caller.
-            await args.Request.SendResponseAsync(returnData); 
-            messageDeferral.Complete();
-
-            var newMessage = new ValueSet();
-            await appServiceconnection.SendMessageAsync(newMessage);
-
+            try
+            {
+                // Start HeatronicGateway
+                HeatronicGateway heatronicGateway = HeatronicGateway.GetDefault();
+                // Listen to new messages from the Heatronic Gateway
+                heatronicGateway.NewMessage += HeatronicGateway_NewMessage;
+            } catch (Exception ex)
+            {
+                Debug.Fail("Failed to initialize the HeatronicGateway: " + ex.Message);
+                if (_deferral != null)
+                {
+                    _deferral.Complete();
+                }
+            }
 
         }
 
@@ -78,10 +69,19 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
             }
         }
 
-        private void HeatronicGateway_NewMessage(object sender, NewMessageEventArgs e)
+        /// <summary>
+        /// Process messages from the Heatronic bus and sends it to application service clients
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void HeatronicGateway_NewMessage(object sender, NewMessageEventArgs e)
         {
-            
+            var message = new ValueSet();
+            message.Add("MessageType", e.MessageType);
+            message.Add("Message", e.Message); // TODO: Send as Json?
 
+            // Send Message to all client
+            await applicationServiceConnection.SendMessageAsync(message);
         }
 
 

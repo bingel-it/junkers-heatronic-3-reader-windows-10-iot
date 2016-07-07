@@ -1,4 +1,5 @@
 ﻿using HeatronicUwpLib.Dto;
+using HeatronicUwpLib.Exceptions;
 using HeatronicUwpLib.Extentions;
 using System;
 using System.Collections.Generic;
@@ -52,23 +53,23 @@ namespace HeatronicUwpLib
                 NewMessage(this, e);
         }
 
-        //public async void InitAsync()
-        //{
-        //    await Task.Run(() =>
-        //    {
-        //        StartReadingAsync();
-        //    });
-        //}
 
         private async void StartReadingAsync()
         {
 
-            string aqs = SerialDevice.GetDeviceSelector();
-            Debug.WriteLine("DeviceSelector: " + aqs);
-            var deviceInformationList = await DeviceInformation.FindAllAsync(aqs);
-            var deviceInformation = deviceInformationList[0];
+            string serialDeviceSelector = SerialDevice.GetDeviceSelector();
+            var deviceList = await DeviceInformation.FindAllAsync(serialDeviceSelector);
+            if (!deviceList.Any())
+            {
+                throw new HeatronicException("No serial device found.");
+            }
 
-            serialPort = await SerialDevice.FromIdAsync(deviceInformation.Id);
+            serialPort = await SerialDevice.FromIdAsync(deviceList.First().Id);
+            if (serialPort == null)
+            {
+                throw new HeatronicException("Could not open serial device.");
+            }
+
             serialPort.WriteTimeout = TimeSpan.FromMilliseconds(1000);
             serialPort.ReadTimeout = TimeSpan.FromMilliseconds(1000);
             serialPort.BaudRate = 9600;
@@ -93,7 +94,6 @@ namespace HeatronicUwpLib
             } while (loopInfinit);
 
             dataReader.DetachStream();
-
 
         }
 

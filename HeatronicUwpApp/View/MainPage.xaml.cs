@@ -39,6 +39,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp
 
         private async void Temp()
         {
+            // https://msdn.microsoft.com/de-de/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service
 
             var packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
             var appServiceName = typeof(HeatronicUwpApp.Tasks.HeatronicListenerTask).FullName;

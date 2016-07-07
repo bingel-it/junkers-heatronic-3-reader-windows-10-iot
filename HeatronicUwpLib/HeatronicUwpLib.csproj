@@ -114,6 +114,7 @@
     <Compile Include="Dto\HeatronicDTO.cs" />
     <Compile Include="Dto\TimestampDTO.cs" />
     <Compile Include="Dto\WarmWaterDTO.cs" />
+    <Compile Include="Exceptions\HeatronicException.cs" />
     <Compile Include="Extentions\ByteArrayExtention.cs" />
     <Compile Include="Extentions\DataReaderExtention.cs" />
     <Compile Include="HeatronicGateway.cs" />
