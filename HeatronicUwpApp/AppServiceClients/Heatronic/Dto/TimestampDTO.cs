@@ -5,12 +5,12 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HeatronicUwpLib.Dto
+namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients.Heatronic.Dto
 {
     [DataContract]
-    public class HeizkreisSteuerungDTO : HeatronicDTO
+    public class TimestampDTO : HeatronicDTO
     {
         [DataMember]
-        public int Heizreis { get; internal set; }
+        public DateTime SystemTimestamp { get; set; }
     }
 }

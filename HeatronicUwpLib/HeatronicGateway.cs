@@ -48,14 +48,34 @@ namespace HeatronicUwpLib
 
         protected virtual void OnNewMessage(NewMessageEventArgs e)
         {
-            Debug.WriteLine("New message: " + e.MessageType);
+            Debug.WriteLine(DateTime.Now + ": New message: " + e.MessageType);
             if (NewMessage != null)
                 NewMessage(this, e);
         }
 
+        private System.Threading.Timer timer;
+
+        private void timerCallback(object state)
+        {
+            OnNewMessage(new NewMessageEventArgs()
+            {
+                Message =  new TimestampDTO()
+                {
+                    SystemTimestamp = new DateTime(2015, 1, 2, 3, 4, 5)
+                },
+                MessageType = MessageType.Timestamp
+            });
+            timer.Change((int)TimeSpan.FromSeconds(2).TotalMilliseconds, System.Threading.Timeout.Infinite);
+        }
 
         private async void StartReadingAsync()
         {
+            if (true)
+            {
+                timer = new System.Threading.Timer(timerCallback, null, (int)TimeSpan.FromSeconds(2).TotalMilliseconds, System.Threading.Timeout.Infinite);
+                //do { } while (true);
+                return;
+            }
 
             string serialDeviceSelector = SerialDevice.GetDeviceSelector();
             var deviceList = await DeviceInformation.FindAllAsync(serialDeviceSelector);
@@ -96,6 +116,7 @@ namespace HeatronicUwpLib
             dataReader.DetachStream();
 
         }
+
 
         private async Task ReadDataAsync(DataReader dataReader)
         {

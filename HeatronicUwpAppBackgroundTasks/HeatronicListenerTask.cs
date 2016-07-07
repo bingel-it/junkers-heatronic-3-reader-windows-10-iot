@@ -1,4 +1,5 @@
-﻿using HeatronicUwpLib;
+﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper;
+using HeatronicUwpLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -77,8 +78,8 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
         private async void HeatronicGateway_NewMessage(object sender, NewMessageEventArgs e)
         {
             var message = new ValueSet();
-            message.Add("MessageType", e.MessageType);
-            message.Add("Message", e.Message); // TODO: Send as Json?
+            message.Add("MessageType", e.MessageType.ToString());
+            message.Add("Message", JSONSerializer.SerializeObject(e.Message)); 
 
             // Send Message to all client
             await applicationServiceConnection.SendMessageAsync(message);

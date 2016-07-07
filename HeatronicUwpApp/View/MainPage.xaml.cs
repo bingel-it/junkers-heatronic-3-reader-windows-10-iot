@@ -26,85 +26,8 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp
         {
             this.InitializeComponent();
 
-            System.Threading.Tasks.Task.Run(async () =>
-            {
-                Temp();
-            });
-
+            App.HeatronicApp.GetDefault().StartApp();
             
-        }
-
-
-        String taskName = "Heatronic Listener BackgroundTask";
-
-        private async void Temp()
-        {
-            // https://msdn.microsoft.com/de-de/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service
-
-            var packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
-            var appServiceName = typeof(HeatronicUwpApp.Tasks.HeatronicListenerTask).FullName;
-            var appServiceConnection = new Windows.ApplicationModel.AppService.AppServiceConnection()
-            {
-                PackageFamilyName = packageFamilyName,
-                AppServiceName = "de.bingelit.myhome.heatronic"
-            };
-
-
-            var status = await appServiceConnection.OpenAsync();
-            appServiceConnection.RequestReceived += AppServiceConnection_RequestReceived;
-            if (status != Windows.ApplicationModel.AppService.AppServiceConnectionStatus.Success)
-            {
-               
-                //return;
-            }
-
-            var message = new ValueSet();
-            var response = await appServiceConnection.SendMessageAsync(message);
-            if (response.Status == Windows.ApplicationModel.AppService.AppServiceResponseStatus.Success)
-            {
-                // Get the data  that the service sent  to us.
-                if (response.Message["Result"] as string == "OK")
-                {
-                    var result = response.Message["Result"] as string;
-                }
-            }
-
-            //try
-            //{
-            //    Windows.ApplicationModel.Background.ApplicationTrigger trigger = null;
-
-            //    if (!Windows.ApplicationModel.Background.BackgroundTaskRegistration.AllTasks.Any(reg => reg.Value.Name == taskName))
-            //    {
-            //        trigger = new Windows.ApplicationModel.Background.ApplicationTrigger();
-            //        //erstellen und registrieren 
-            //        var builder = new Windows.ApplicationModel.Background.BackgroundTaskBuilder();
-
-            //        builder.Name = taskName;
-            //        builder.TaskEntryPoint = typeof(HeatronicUwpApp.Tasks.HeatronicListenerTask).FullName;
-            //        builder.SetTrigger(trigger);
-
-            //        builder.Register();
-            //    }
-            //    else
-            //    {
-            //        var registration = Windows.ApplicationModel.Background.BackgroundTaskRegistration.AllTasks.FirstOrDefault(reg => reg.Value.Name == taskName).Value as Windows.ApplicationModel.Background.BackgroundTaskRegistration;
-            //        trigger = registration.Trigger as Windows.ApplicationModel.Background.ApplicationTrigger;
-
-            //    }
-
-            //    var taskParameters = new ValueSet();
-            //    var taskResult = await trigger.RequestAsync(taskParameters);
-
-
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
-        }
-
-        private void AppServiceConnection_RequestReceived(Windows.ApplicationModel.AppService.AppServiceConnection sender, Windows.ApplicationModel.AppService.AppServiceRequestReceivedEventArgs args)
-        {
         }
     }
 }

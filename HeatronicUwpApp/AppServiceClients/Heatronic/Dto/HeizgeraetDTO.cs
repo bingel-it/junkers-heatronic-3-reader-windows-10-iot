@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HeatronicUwpLib.Dto
+namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients.Heatronic.Dto
 {
     [DataContract]
     public class HeizgeraetDTO : HeatronicDTO
