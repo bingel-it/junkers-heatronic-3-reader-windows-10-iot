@@ -25,6 +25,69 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp
         public MainPage()
         {
             this.InitializeComponent();
+
+            System.Threading.Tasks.Task.Run(async () =>
+            {
+                Temp();
+            });
+
+            
+        }
+
+
+        String taskName = "Heatronic Listener BackgroundTask";
+
+        private async void Temp()
+        {
+
+            var packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
+            var appServiceName = typeof(HeatronicUwpApp.Tasks.HeatronicListenerTask).FullName;
+            var appServiceConnection = new Windows.ApplicationModel.AppService.AppServiceConnection()
+            {
+                PackageFamilyName = packageFamilyName, // 6ff9325e-7d79-4b41-8a5a-f6be571694fd_k613v7feh4sag
+                AppServiceName = "de.bingelit.myhome.heatronic"
+            };
+
+
+            var status = await appServiceConnection.OpenAsync();
+            if (status != Windows.ApplicationModel.AppService.AppServiceConnectionStatus.Success)
+            {
+               
+                //return;
+            }
+
+            try
+            {
+                Windows.ApplicationModel.Background.ApplicationTrigger trigger = null;
+
+                if (!Windows.ApplicationModel.Background.BackgroundTaskRegistration.AllTasks.Any(reg => reg.Value.Name == taskName))
+                {
+                    trigger = new Windows.ApplicationModel.Background.ApplicationTrigger();
+                    //erstellen und registrieren 
+                    var builder = new Windows.ApplicationModel.Background.BackgroundTaskBuilder();
+
+                    builder.Name = taskName;
+                    builder.TaskEntryPoint = typeof(HeatronicUwpApp.Tasks.HeatronicListenerTask).FullName;
+                    builder.SetTrigger(trigger);
+
+                    builder.Register();
+                }
+                else
+                {
+                    var registration = Windows.ApplicationModel.Background.BackgroundTaskRegistration.AllTasks.FirstOrDefault(reg => reg.Value.Name == taskName).Value as Windows.ApplicationModel.Background.BackgroundTaskRegistration;
+                    trigger = registration.Trigger as Windows.ApplicationModel.Background.ApplicationTrigger;
+
+                }
+
+                var taskParameters = new ValueSet();
+                var taskResult = await trigger.RequestAsync(taskParameters);
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

@@ -36,6 +36,15 @@ namespace HeatronicUwpLib
 
         public event NewMessageEventHandler NewMessage;
 
+        private static HeatronicGateway _instance;
+        private HeatronicGateway()
+        {
+            Task.Run(() =>
+            {
+                StartReadingAsync();
+            });
+        }
+
         protected virtual void OnNewMessage(NewMessageEventArgs e)
         {
             Debug.WriteLine("New message: " + e.MessageType);
@@ -43,13 +52,13 @@ namespace HeatronicUwpLib
                 NewMessage(this, e);
         }
 
-        public async void InitAsync()
-        {
-            await Task.Run(() =>
-            {
-                StartReadingAsync();
-            });
-        }
+        //public async void InitAsync()
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        StartReadingAsync();
+        //    });
+        //}
 
         private async void StartReadingAsync()
         {
@@ -221,8 +230,14 @@ namespace HeatronicUwpLib
             }
         }
 
-
-
+        public static HeatronicGateway GetDefault()
+        {
+            if (_instance == null)
+            {
+                _instance = new HeatronicGateway();
+            }
+            return _instance;
+        }
     }
 
 }
