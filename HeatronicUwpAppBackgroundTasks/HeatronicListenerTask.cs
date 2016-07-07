@@ -33,10 +33,9 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 
             // Retrieve the app service connection
             var details = taskInstance.TriggerDetails as AppServiceTriggerDetails; // ApplicationTriggerDetails;
-            //details.CallerPackageFamilyName
-            //            appServiceconnection = details.AppServiceConnection;
-            //            appServiceconnection.RequestReceived += OnRequestReceived;
-            //appServiceconnection.SendMessageAsync();
+            appServiceconnection = details.AppServiceConnection;
+            appServiceconnection.RequestReceived += OnRequestReceived;
+
 
             
 
@@ -58,7 +57,12 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 
             // Return the data to the caller.
             await args.Request.SendResponseAsync(returnData); 
-            messageDeferral.Complete(); 
+            messageDeferral.Complete();
+
+            var newMessage = new ValueSet();
+            await appServiceconnection.SendMessageAsync(newMessage);
+
+
         }
 
         /// <summary> 
