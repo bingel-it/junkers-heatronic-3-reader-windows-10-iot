@@ -12,7 +12,7 @@ using static BingelIT.MyHome.MicroWebServerLib.HttpRequest;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 {
-    public class WebServerListenerTask : IBackgroundTask, IDisposable
+    public sealed class WebServerListenerTask : IBackgroundTask, IDisposable
     {
         /// <summary>
         /// Task deferral for async processing 
@@ -81,20 +81,20 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void HeatronicGateway_NewMessage(object sender, NewMessageEventArgs e)
-        {
-            //var message = new ValueSet();
-            //message.Add("MessageType", e.MessageType.ToString());
-            //message.Add("Message", JSONSerializer.SerializeObject(e.Message));
+        //private async void HeatronicGateway_NewMessage(object sender, NewMessageEventArgs e)
+        //{
+        //    //var message = new ValueSet();
+        //    //message.Add("MessageType", e.MessageType.ToString());
+        //    //message.Add("Message", JSONSerializer.SerializeObject(e.Message));
 
-            //// Send Message to all client
-            //await applicationServiceConnection.SendMessageAsync(message);
+        //    //// Send Message to all client
+        //    //await applicationServiceConnection.SendMessageAsync(message);
 
 
 
-            networkPushService.SendJsonToListnerAsync(subUrl, JSONSerializer.SerializeObject(item));
+        //    networkPushService.SendJsonToListnerAsync(subUrl, JSONSerializer.SerializeObject(item));
 
-        }
+        //}
 
         //private void HeatronicGateway_NewMessage(object sender, NewMessageEventArgs e)
         //{
