@@ -1,5 +1,5 @@
 ﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper;
-using BingelIT.MyHome.MicroWebServerLib;
+using BingelIT.MicroWebServerLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
-using static BingelIT.MyHome.MicroWebServerLib.HttpRequest;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 {

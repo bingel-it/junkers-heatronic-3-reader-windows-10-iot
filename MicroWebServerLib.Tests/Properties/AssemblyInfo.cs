@@ -6,16 +6,15 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über folgende 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("MicroWebServerLib")]
-[assembly: AssemblyDescription("A small HTTP WebServer to recieve HTTP Requests (GET/PUT/POST/DELETE)")]
+[assembly: AssemblyTitle("MicroWebServerLib.Tests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Bingel-IT")]
-[assembly: AssemblyProduct("MicroWebServerLib")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MicroWebServerLib.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("de")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("BingelIT.MicroWebServerLib.Tests")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
@@ -27,6 +26,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]

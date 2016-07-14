@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BingelIT.MyHome.MicroWebServerLib
+namespace BingelIT.MicroWebServerLib
 {
     public class HttpResponse
     {

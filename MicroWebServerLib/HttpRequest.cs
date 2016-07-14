@@ -4,21 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BingelIT.MyHome.MicroWebServerLib
+namespace BingelIT.MicroWebServerLib
 {
     public class  HttpRequest 
     {
-        public enum HttpRequestMethod
-        {
-            Unknown,
-            Get,
-            Post,
-            Put,
-            Delete,
-            Options,
-            Move,
-            Any
-        }
 
         /// <summary>
         /// URL of request

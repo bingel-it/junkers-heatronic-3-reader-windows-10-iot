@@ -1,6 +1,6 @@
 ﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients.Heatronic;
 using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Rest;
-using BingelIT.MyHome.MicroWebServerLib;
+using BingelIT.MicroWebServerLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
-using static BingelIT.MyHome.MicroWebServerLib.HttpRequest;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.App
 {

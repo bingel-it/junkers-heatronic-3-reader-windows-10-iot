@@ -7,9 +7,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using static BingelIT.MyHome.MicroWebServerLib.HttpRequest;
 
-namespace BingelIT.MyHome.MicroWebServerLib
+namespace BingelIT.MicroWebServerLib
 {
 
     public delegate HttpResponse RequestDelegate(HttpRequest request);

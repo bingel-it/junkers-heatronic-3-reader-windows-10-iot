@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking.Sockets;
-using static BingelIT.MyHome.MicroWebServerLib.HttpRequest;
 
-namespace BingelIT.MyHome.MicroWebServerLib
+namespace BingelIT.MicroWebServerLib
 {
     class HttpRequestBuilder 
     {
@@ -18,7 +17,7 @@ namespace BingelIT.MyHome.MicroWebServerLib
         /// <param name="requestData"></param>
         public HttpRequest ProcessRequest(String requestData)
         {
-
+            
             var request = new HttpRequest();
 
             Debug.WriteLine(requestData);
