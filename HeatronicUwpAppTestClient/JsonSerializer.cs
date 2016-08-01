@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
+namespace BingelIT.MyHome.Heatronic.HeatronicUwpAppTestClient
 {
     public static class JSONSerializer
     {
@@ -23,17 +23,16 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
             }
         }
 
-        ///// <summary>
-        ///// DeSerializes an object from JSON
-        ///// </summary>
-        //public static T DeSerialize<T>(string json) where T : class
-        //{
-        //    using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-        //    {
-        //        var serializer = new DataContractJsonSerializer(typeof(T));
-        //        return serializer.ReadObject(stream) as T;
-        //    }
-        //}
-
+        /// <summary>
+        /// DeSerializes an object from JSON
+        /// </summary>
+        public static T DeSerialize<T>(string json) where T : class
+        {
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            {
+                var serializer = new DataContractJsonSerializer(typeof(T));
+                return serializer.ReadObject(stream) as T;
+            }
+        }
     }
 }

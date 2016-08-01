@@ -92,6 +92,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Compile Include="AppServiceClients\AppServiceClient.Heatronic.cs" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +108,7 @@
     <Compile Include="AppServiceClients\Heatronic\MessageTypeEnum.cs" />
     <Compile Include="AppServiceClients\Heatronic\NewMessageEventArgs.cs" />
     <Compile Include="App\HeatronicApp.cs" />
-    <Compile Include="AppServiceClients\Heatronic\HeatronicAppServiceClient.cs" />
+    <Compile Include="AppServiceClients\AppServiceClient.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

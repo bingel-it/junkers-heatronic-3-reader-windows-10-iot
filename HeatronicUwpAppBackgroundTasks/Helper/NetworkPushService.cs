@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
 {
-    class NetworkPushService
+    class NetworkPushService : IDisposable
     {
         private ConcurrentDictionary<String, Uri> listeners = new ConcurrentDictionary<string, Uri>();
         private HttpClient httpClient = null;
@@ -62,6 +62,16 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
         {
             Uri value; 
             this.listeners.TryRemove(key, out value);
+        }
+
+        public void Dispose()
+        {
+            this.listeners.Clear();
+
+            if (this.httpClient != null)
+            {
+                this.httpClient.Dispose();
+            }
         }
     }
 }

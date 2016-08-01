@@ -69,10 +69,10 @@ namespace HeatronicUwpLib
 
         private async void StartReadingAsync()
         {
-            if (false)
+            if (true)
             {
                 timer = new System.Threading.Timer(timerCallback, null, (int)TimeSpan.FromSeconds(2).TotalMilliseconds, System.Threading.Timeout.Infinite);
-                //do { } while (true);
+                do { } while (true);
                 return;
             }
 

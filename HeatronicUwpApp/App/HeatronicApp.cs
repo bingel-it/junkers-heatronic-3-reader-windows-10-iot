@@ -1,5 +1,4 @@
-﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.AppServiceClients.Heatronic;
-using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Rest;
+﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Rest;
 using BingelIT.MicroWebServerLib;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients.Heatronic;
+using BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.App
 {
@@ -32,18 +32,19 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.App
             return _instance;
         }
 
-        private HeatronicAppServiceClient heatronicAppServiceClient;
+        private AppServiceClient heatronicAppServiceClient;
 
         public void StartApp()
         {
-            this.heatronicAppServiceClient = new HeatronicAppServiceClient();
+            this.heatronicAppServiceClient = new AppServiceClient();
 
             System.Threading.Tasks.Task.Run(() =>
             {
                 this.heatronicAppServiceClient.OpenAsync();
                 this.heatronicAppServiceClient.NewMessage += HeatronicAppServiceClient_NewMessage;
             });
-       
+
+
         }
 
         private void HeatronicAppServiceClient_NewMessage(object sender, NewMessageEventArgs e)

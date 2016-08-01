@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{12C26369-7E78-4E84-90A8-7DE2B8DDA3CC}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks</RootNamespace>
     <AssemblyName>BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks</AssemblyName>
@@ -108,12 +108,18 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackgroundTask.cs" />
     <Compile Include="Extentions\HttpClientExtention.cs" />
-    <Compile Include="HeatronicListenerTask.cs" />
     <Compile Include="Helper\JSONSerializer.cs" />
     <Compile Include="Helper\NetworkPushService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebServerListenerTask.cs" />
+    <Compile Include="Rto\BaseMessageRto.cs" />
+    <Compile Include="Rto\HeizgeraetMessageRto.cs" />
+    <Compile Include="Rto\HeizkreisMessageRto.cs" />
+    <Compile Include="Rto\RtoFactory.cs" />
+    <Compile Include="Rto\TimestampMessageRto.cs" />
+    <Compile Include="Rto\WarmwasserMessageRto.cs" />
+    <Compile Include="Services\WebServerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HeatronicUwpLib\HeatronicUwpLib.csproj">

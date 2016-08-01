@@ -1,4 +1,5 @@
 ﻿using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper;
+using BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Services;
 using HeatronicUwpLib;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,11 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation.Collections;
-using Windows.Storage;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 {
-    /// <summary>
-    /// Heatronic listener background task. Listening to the Heatronic bus and sends the messages to all application clients
-    /// </summary>
-    public sealed class HeatronicListenerTask : IBackgroundTask, IDisposable
+    public sealed class BackgroundTask : IBackgroundTask, IDisposable
     {
-
         /// <summary>
         /// Task deferral for async processing 
         /// </summary>
@@ -29,6 +25,9 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
         /// </summary>
         private AppServiceConnection applicationServiceConnection;
 
+        private HeatronicGateway heatronicService;
+
+        private WebServerService webServerService;
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -42,10 +41,19 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 
             try
             {
-                InitHeatronicGateway();
+                // Start HeatronicGateway
+                heatronicService = HeatronicGateway.GetDefault();
+                // Listen to new messages from the Heatronic Gateway
+                heatronicService.NewMessage += HeatronicGateway_NewMessage;
+
+                // Init Webserver
+                webServerService = WebServerService.GetDefault();
+                webServerService.Init();
             }
             catch (Exception ex)
             {
+                Debug.Fail("Failed to initialize the HeatronicGateway: " + ex.Message);
+
                 if (_deferral != null)
                 {
                     _deferral.Complete();
@@ -53,21 +61,6 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
             }
         }
 
-        private void InitHeatronicGateway()
-        {
-            try
-            {
-                // Start HeatronicGateway
-                HeatronicGateway heatronicGateway = HeatronicGateway.GetDefault();
-                // Listen to new messages from the Heatronic Gateway
-                heatronicGateway.NewMessage += HeatronicGateway_NewMessage;
-            }
-            catch (Exception ex)
-            {
-                Debug.Fail("Failed to initialize the HeatronicGateway: " + ex.Message);
-                throw ex;
-            }
-        }
 
         /// <summary> 
         /// Called when the background task is canceled by the app or by the system.
@@ -82,6 +75,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
             }
         }
 
+
         /// <summary>
         /// Process messages from the Heatronic bus and sends it to application service clients
         /// </summary>
@@ -91,11 +85,12 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
         {
             var message = new ValueSet();
             message.Add("MessageType", e.MessageType.ToString());
-            message.Add("Message", JSONSerializer.SerializeObject(e.Message)); 
+            message.Add("Message", JSONSerializer.SerializeObject(e.Message));
 
             // Send Message to all client
             await applicationServiceConnection.SendMessageAsync(message);
         }
+
 
 
         /// <summary>
@@ -103,11 +98,6 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
         /// </summary>
         public void Dispose()
         {
-            HeatronicGateway heatronicGateway = HeatronicGateway.GetDefault();
-            if (null != heatronicGateway)
-            {
-                heatronicGateway.NewMessage -= HeatronicGateway_NewMessage;
-            }
         }
     }
 }
