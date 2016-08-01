@@ -21,14 +21,17 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.HeatronicListenerTask">
+        <uap:Extension Category="windows.appService" EntryPoint="BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.HeatronicListenerTask">
+          <uap:AppService Name="de.bingelit.myhome.heatronic.listener"/>
+        </uap:Extension>
+        <uap:Extension Category="windows.appService" EntryPoint="BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.WebServerListenerTask">
+          <uap:AppService Name="de.bingelit.myhome.heatronic.webserver"/>
+        </uap:Extension>
+        <!--<Extension Category="windows.backgroundTasks" EntryPoint="BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.HeatronicListenerTask">
           <BackgroundTasks>
             <Task Type="general" />
           </BackgroundTasks>
-        </Extension>
-        <uap:Extension Category="windows.appService" EntryPoint="BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.HeatronicListenerTask">
-          <uap:AppService Name="de.bingelit.myhome.heatronic"/>
-        </uap:Extension>
+        </Extension>-->
       </Extensions>
     </Application>
   </Applications>

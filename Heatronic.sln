@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeatronicUwpApp", "HeatronicUwpApp\HeatronicUwpApp.csproj", "{94824A14-9C35-41B4-A308-DBCED39DEAFE}"
 EndProject
@@ -122,8 +122,6 @@ Global
 		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|ARM.ActiveCfg = Release|ARM
-		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|ARM.Build.0 = Release|ARM
-		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|ARM.Deploy.0 = Release|ARM
 		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|x64.ActiveCfg = Release|x64
 		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|x64.Build.0 = Release|x64
 		{5E537280-C5D2-4A8E-A2C0-9A4F891DF46E}.Release|x64.Deploy.0 = Release|x64

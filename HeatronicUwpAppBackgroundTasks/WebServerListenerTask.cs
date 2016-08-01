@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel;
 
 namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 {
@@ -62,6 +63,33 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
             }
 
         }
+
+        private async void OpenAsync()
+        {
+
+            var packageFamilyName = Package.Current.Id.FamilyName;
+            var appServiceName = "de.bingelit.myhome.heatronic.listener";
+            var appServiceConnection = new AppServiceConnection()
+            {
+                PackageFamilyName = packageFamilyName,
+                AppServiceName = appServiceName
+            };
+
+            var status = await appServiceConnection.OpenAsync();
+            if (status != Windows.ApplicationModel.AppService.AppServiceConnectionStatus.Success)
+            {
+                throw new Exception("Could not connect to Heatronic application service");
+            }
+
+            appServiceConnection.RequestReceived += AppServiceConnection_RequestReceived;
+        }
+
+        private void AppServiceConnection_RequestReceived(AppServiceConnection sender, AppServiceRequestReceivedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+
         /// <summary> 
         /// Called when the background task is canceled by the app or by the system.
         /// </summary> 

@@ -27,7 +27,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients.Heatronic
             // https://msdn.microsoft.com/de-de/windows/uwp/launch-resume/how-to-create-and-consume-an-app-service
 
             var packageFamilyName = Package.Current.Id.FamilyName;
-            var appServiceName = "de.bingelit.myhome.heatronic";
+            var appServiceName = "de.bingelit.myhome.heatronic.listener";
             var appServiceConnection = new AppServiceConnection()
             {
                 PackageFamilyName = packageFamilyName,
@@ -77,7 +77,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients.Heatronic
 
         protected virtual void OnNewMessage(NewMessageEventArgs e)
         {
-            Debug.WriteLine(DateTime.Now + ": New message: " + e.MessageType);
+            Debug.WriteLine(DateTime.Now + ": New message: " + e.MessageType + " - " + e.Message.ToString());
             if (NewMessage != null)
                 NewMessage(this, e);
         }

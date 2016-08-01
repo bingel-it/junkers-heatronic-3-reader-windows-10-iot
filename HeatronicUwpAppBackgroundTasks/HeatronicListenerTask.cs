@@ -42,19 +42,31 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks
 
             try
             {
-                // Start HeatronicGateway
-                HeatronicGateway heatronicGateway = HeatronicGateway.GetDefault();
-                // Listen to new messages from the Heatronic Gateway
-                heatronicGateway.NewMessage += HeatronicGateway_NewMessage;
-            } catch (Exception ex)
+                InitHeatronicGateway();
+            }
+            catch (Exception ex)
             {
-                Debug.Fail("Failed to initialize the HeatronicGateway: " + ex.Message);
                 if (_deferral != null)
                 {
                     _deferral.Complete();
                 }
             }
+        }
 
+        private void InitHeatronicGateway()
+        {
+            try
+            {
+                // Start HeatronicGateway
+                HeatronicGateway heatronicGateway = HeatronicGateway.GetDefault();
+                // Listen to new messages from the Heatronic Gateway
+                heatronicGateway.NewMessage += HeatronicGateway_NewMessage;
+            }
+            catch (Exception ex)
+            {
+                Debug.Fail("Failed to initialize the HeatronicGateway: " + ex.Message);
+                throw ex;
+            }
         }
 
         /// <summary> 

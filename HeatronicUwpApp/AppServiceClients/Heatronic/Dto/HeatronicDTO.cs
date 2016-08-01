@@ -17,5 +17,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.AppServiceClients.Heatronic.
 
         [DataMember]
         public DateTime Timestamp { get; set; }
+
+
     }
 }
