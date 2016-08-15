@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="6ff9325e-7d79-4b41-8a5a-f6be571694fd" Publisher="CN=tbing" Version="1.0.0.0" />
+  <Identity Name="6ff9325e-7d79-4b41-8a5a-f6be571694fd" Publisher="CN=tbing" Version="1.0.3.0" />
   <mp:PhoneIdentity PhoneProductId="6ff9325e-7d79-4b41-8a5a-f6be571694fd" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>HeatronicUwpApp</DisplayName>
-    <PublisherDisplayName>tbing</PublisherDisplayName>
+    <PublisherDisplayName>Thomas Bingel</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -22,7 +22,7 @@
       </uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.appService" EntryPoint="BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.BackgroundTask">
-          <uap:AppService Name="de.bingelit.myhome.heatronic.bgTask"/>
+          <uap:AppService Name="de.bingelit.myhome.heatronic.bgTask" />
         </uap:Extension>
         <!--<Extension Category="windows.backgroundTasks" EntryPoint="BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.HeatronicListenerTask">
           <BackgroundTasks>

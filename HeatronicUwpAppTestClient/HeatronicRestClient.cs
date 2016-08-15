@@ -12,8 +12,8 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpAppTestClient
     {
         // Invoke-RestMethod "http://192.168.0.29:91/rest/init/?key=notebook&uri=http://192.168.0.20:9096/" -Method Put
         public void RegisterService()
-        {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://192.168.0.29:91/rest/init/?key=notebook&uri=http://192.168.0.20:9096/");
+       {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://192.168.0.25:91/rest/init/?key=notebook&uri=http://192.168.0.20:9096/");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "PUT";
 

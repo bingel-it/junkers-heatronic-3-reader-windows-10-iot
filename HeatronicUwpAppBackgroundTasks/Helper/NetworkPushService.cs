@@ -11,7 +11,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
 {
     class NetworkPushService : IDisposable
     {
-        private ConcurrentDictionary<String, Uri> listeners = new ConcurrentDictionary<string, Uri>();
+        private ConcurrentDictionary<String, MessageListener> listeners = new ConcurrentDictionary<string, MessageListener>();
         private HttpClient httpClient = null;
 
         public NetworkPushService()
@@ -23,45 +23,67 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
 
         public async void SendJsonToListnerAsync(String subUrl, String jsonString)
         {
+            Debug.WriteLine("Sending: " + jsonString);
             List<String> listenersToRemove = new List<string>();
 
-            var httpResponse = new HttpResponseMessage();
-            foreach (var listenerKey in this.listeners.Keys)
+            using (var content = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json"))
             {
-                var listenerUrl = listeners[listenerKey];
-                try
+                foreach (var listenerKey in this.listeners.Keys)
                 {
-                    var content = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
-                    //Send the GET request
-                    httpResponse = await httpClient.PostAsync(listenerUrl, content);
-                    if (!httpResponse.IsSuccessStatusCode)
+                    var listener = listeners[listenerKey];
+                    try
                     {
-                        listenersToRemove.Add(listenerKey);
+                        //Send the GET request
+                        using (var httpResponse = await httpClient.PostAsync(listener.Uri, content))
+                        {
+                            Debug.WriteLine("Sending Message to server");
+                            if (!httpResponse.IsSuccessStatusCode)
+                            {
+                                listener.TryCounter = 0;
+                                listenersToRemove.Add(listenerKey);
+                            }
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Failed sending Message to " + ex.Message, ex.HResult.ToString("X"));
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("Failed sending Message to " + ex.Message, ex.HResult.ToString("X"));
+                        listener.TryCounter++;
+                        if (listener.TryCounter > 10)
+                        {
+                            listenersToRemove.Add(listenerKey);
+                        }
+                    }
                 }
             }
 
+
             foreach (var key in listenersToRemove)
             {
-                Uri uri;
+                MessageListener uri;
                 listeners.TryRemove(key, out uri);
+                Debug.WriteLine("Removing listener: " + key);
             }
 
         }
 
         public void Init(String listenerkey, Uri listenerUri)
         {
-            this.listeners.TryAdd(listenerkey, listenerUri);
+            var listener = new MessageListener()
+            {
+                Uri = listenerUri
+            };
+
+            this.listeners.TryAdd(listenerkey, listener);
         }
 
         internal void RemoveListener(string key)
         {
-            Uri value; 
-            this.listeners.TryRemove(key, out value);
+
+            var listener = new MessageListener()
+            {
+                
+            }; 
+            this.listeners.TryRemove(key, out listener);
         }
 
         public void Dispose()
@@ -73,5 +95,12 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Helper
                 this.httpClient.Dispose();
             }
         }
+    }
+
+    class MessageListener
+    {
+        public Uri Uri { get; set; }
+
+        public int TryCounter { get; set; }
     }
 }

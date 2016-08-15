@@ -69,12 +69,12 @@ namespace HeatronicUwpLib
 
         private async void StartReadingAsync()
         {
-            if (true)
-            {
-                timer = new System.Threading.Timer(timerCallback, null, (int)TimeSpan.FromSeconds(2).TotalMilliseconds, System.Threading.Timeout.Infinite);
-                do { } while (true);
-                return;
-            }
+            //if (true)
+            //{
+            //    timer = new System.Threading.Timer(timerCallback, null, (int)TimeSpan.FromSeconds(2).TotalMilliseconds, System.Threading.Timeout.Infinite);
+            //    do { } while (true);
+            //    return;
+            //}
 
             string serialDeviceSelector = SerialDevice.GetDeviceSelector();
             var deviceList = await DeviceInformation.FindAllAsync(serialDeviceSelector);
@@ -104,7 +104,7 @@ namespace HeatronicUwpLib
             {
                 try
                 {
-                    await ReadDataAsync(dataReader);
+                    await ReadDataAsync(dataReader); 
                 }
                 catch (Exception ex)
                 {

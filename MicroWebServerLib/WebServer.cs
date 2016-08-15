@@ -28,6 +28,7 @@ namespace BingelIT.MicroWebServerLib
 
         private IList<PathHandler> pathHandlers = new List<PathHandler>();
         private HttpRequestBuilder requestCreator = new HttpRequestBuilder();
+        private StreamSocketListener listener;
 
         public WebServer(uint port = 80)
         {
@@ -36,22 +37,22 @@ namespace BingelIT.MicroWebServerLib
 
         public async void InitAsync()
         {
-            await Task.Run( () =>
-            {
-                while (true)
-                {
+            //await Task.Run( () =>
+            //{
+                //while (true)
+                //{
                     try
                     {
-                        StreamSocketListener listener = new StreamSocketListener();
+                        listener = new StreamSocketListener();
                         listener.ConnectionReceived += (s, e) => ProcessRequestAsync(e.Socket);
-                        listener.BindServiceNameAsync(this.Port.ToString()).AsTask();
+                        await listener.BindServiceNameAsync(this.Port.ToString());
                     }
                     catch (Exception ex)
                     {
                         Debug.WriteLine("Exception: " + ex.Message);
                     }
-                }
-            });
+                //}
+            //});
             
         }
 

@@ -116,6 +116,7 @@
     <Compile Include="Rto\BaseMessageRto.cs" />
     <Compile Include="Rto\HeizgeraetMessageRto.cs" />
     <Compile Include="Rto\HeizkreisMessageRto.cs" />
+    <Compile Include="Rto\MessageTypeEnum.cs" />
     <Compile Include="Rto\RtoFactory.cs" />
     <Compile Include="Rto\TimestampMessageRto.cs" />
     <Compile Include="Rto\WarmwasserMessageRto.cs" />

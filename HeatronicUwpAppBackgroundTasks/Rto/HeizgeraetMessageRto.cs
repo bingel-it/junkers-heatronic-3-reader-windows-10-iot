@@ -19,6 +19,8 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Rto
         [DataMember]
         public bool HeizungsPumpeAn { get; internal set; }
         [DataMember]
+        public bool WarmwasserMode { get; internal set; }
+        [DataMember]
         public bool ZirkulationsPumpeAn { get; internal set; }
     }
 }

@@ -22,6 +22,8 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpAppTestClient
         static void Main(string[] args)
         {
             var program = new Program();
+            Console.WriteLine("Press Enter to start...");
+            Console.ReadLine();
             program.Start();
             Console.ReadLine();
 
