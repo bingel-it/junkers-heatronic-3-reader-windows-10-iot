@@ -23,6 +23,7 @@ namespace BingelIT.MyHome.Heatronic.HeatronicUwpApp.Tasks.Rto
                         restMsg.BetriebsflammeAn = msg.BetriebsflammeAn;
                         restMsg.BrennerLeistung = msg.BrennerLeistung;
                         restMsg.HeizungsMode = msg.HeizungsMode;
+                        restMsg.WarmwasserMode = msg.WarmwasserMode;
                         restMsg.HeizungsPumpeAn = msg.HeizungsPumpeAn;
                         restMsg.ZirkulationsPumpeAn = msg.ZirkulationsPumpeAn;
                         return restMsg;
